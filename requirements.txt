@@ -1,0 +1,9 @@
+Django
+psycopg2-binary
+django-environ
+django-crispy-forms
+django-widget-tweaks
+Pillow
+python-decouple
+django-allauth
+django-phonenumber-field
