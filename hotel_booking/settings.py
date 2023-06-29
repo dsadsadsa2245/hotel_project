@@ -40,17 +40,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # inst_app
-    'crispy_forms',
-    'widget_tweaks',
+    # 'crispy_forms',
+    # 'widget_tweaks',
     'rest_framework',
-    'rest_auth',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'phonenumber_field',
+    # 'rest_auth',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'phonenumber_field',
     # my_app
-    'hotels',
-    'reviews',
+    # 'hotels',
+    # 'reviews',
     'autorization',
 
 
