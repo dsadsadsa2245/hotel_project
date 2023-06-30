@@ -5,35 +5,40 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        exclude = ('password',)
-
-
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(min_length=8, max_length=20, required=True, write_only=True)
-    password2 = serializers.CharField(min_length=8, max_length=20, required=True, write_only=True)
+    password = serializers.CharField(min_length=8, write_only=True, required=True)
+    password_confirmation = serializers.CharField(min_length=8, write_only=True, required=True)
 
+    # first_name = serializers.CharField(required=True)
     class Meta:
         model = User
-        fields = ('email', 'password', 'password2', 'first_name', 'last_name', 'avatar', 'username')
+        fields = ('username', 'email', 'password', 'password_confirmation')
 
     def validate(self, attrs):
-        password = attrs['password']
-        password2 = attrs.pop('password2')
-        if password2 != password:
-            raise serializers.ValidationError('Passwprd did\'t match!')
-        validate_password(password)
+        password2 = attrs.pop('password_confirmation')
+        if password2 != attrs['password']:
+            raise serializers.ValidationError(
+                'Пароли не совпали!'
+            )
+        validate_password(attrs['password'])
         return attrs
 
+    def validate_first_name(self, value):
+        if not value.istitle():
+            raise serializers.ValidationError(
+                'Name must start with uppercase letter'
+            )
+        return value
+
     def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
+        user = User.objects.create(**validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
         return user
 
 
-class GetUsersSerializers(serializers.ModelSerializer):
-    class Meta:
-        model=User
-        fields = '__all__'
 
+class UserListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'first_name', 'last_name')

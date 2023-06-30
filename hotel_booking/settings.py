@@ -26,7 +26,6 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(' ')
-
 AUTH_USER_MODEL = 'auth.User'
 
 
@@ -43,13 +42,14 @@ INSTALLED_APPS = [
     # 'crispy_forms',
     # 'widget_tweaks',
     'rest_framework',
+    'rest_framework_simplejwt',
     # 'rest_auth',
     # 'allauth',
-    # 'allauth.account',
+    # 'allauth.autorization',
     # 'allauth.socialaccount',
     # 'phonenumber_field',
     # my_app
-    # 'hotels',
+    # 'hotels',x
     # 'reviews',
     'autorization',
 
@@ -139,10 +139,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
-SITE_ID = 1
-EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
+
 
