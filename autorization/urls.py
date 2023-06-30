@@ -5,5 +5,5 @@ from autorization import views
 urlpatterns = [
     path('register/', views.UserRegisterView.as_view()),
     path('', views.UserListView.as_view()),
-    path('login/',views.LoginView.as_view())
+    path('login/',views.UserLoginView.as_view()),
 ]
